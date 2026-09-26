@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ナンプレ - Sudoku Master</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="logo-area">
+        <a href="../index.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 6px; background: rgba(255,255,255,0.05); margin-right: 6px;">← 一覧</a>
+        <h1>ナンプレ</h1>
+        <span class="badge">Master</span>
+      </div>
+    </header>
+
+    <!-- Status Bar: 難易度 & タイマー -->
+    <div class="status-bar">
+      <div class="difficulty-selector">
+        <label for="difficulty-select" style="font-size: 0.85rem; color: var(--text-muted);">難易度:</label>
+        <select id="difficulty-select">
+          <option value="easy">初級</option>
+          <option value="medium" selected>中級</option>
+          <option value="hard">上級</option>
+          <option value="expert">エキスパート</option>
+        </select>
+      </div>
+
+      <div class="timer-area">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span id="timer-text">00:00</span>
+        <button id="pause-btn" class="timer-btn" title="一時停止/再開">
+          <svg id="pause-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Sudoku Board -->
+    <div class="board-wrapper">
+      <div id="sudoku-board" class="sudoku-board"></div>
+    </div>
+
+    <!-- Action Tools -->
+    <div class="controls-bar">
+      <button id="undo-btn" class="tool-btn" title="元に戻す (Ctrl+Z)" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 7v6h6"></path>
+          <path d="M21 17a9 9 0 00-9-9 9 9 0 00-6 2.3L3 13"></path>
+        </svg>
+        <span>戻す</span>
+      </button>
+
+      <button id="redo-btn" class="tool-btn" title="やり直す (Ctrl+Y)" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 7v6h-6"></path>
+          <path d="M3 17a9 9 0 019-9 9 9 0 016 2.3L21 13"></path>
+        </svg>
+        <span>進む</span>
+      </button>
+
+      <button id="erase-btn" class="tool-btn" title="消去 (Delete / Backspace)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 20H7L3 16C2.5 15.5 2.5 14.5 3 14L13 4C13.5 3.5 14.5 3.5 15 4L20 9C20.5 9.5 20.5 10.5 20 11L11 20"></path>
+          <line x1="18" y1="12" x2="11" y2="19"></line>
+        </svg>
+        <span>消去</span>
+      </button>
+
+      <button id="pencil-btn" class="tool-btn" title="メモ機能切替 (P)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9"></path>
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+        </svg>
+        <span>メモ <span class="pencil-indicator" id="pencil-indicator">OFF</span></span>
+      </button>
+
+      <button id="hint-btn" class="tool-btn" title="ヒント (H)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18h6"></path>
+          <path d="M10 22h4"></path>
+          <path d="M15 8a5 5 0 0 0-8.9-3.2A5 5 0 0 0 8 13.9v1.1a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-1.1A5 5 0 0 0 15 8z"></path>
+        </svg>
+        <span>ヒント</span>
+      </button>
+    </div>
+
+    <!-- Number Keypad -->
+    <div id="keypad" class="keypad">
+      <!-- 1-9 generated dynamically or statically -->
+    </div>
+
+    <!-- Footer Action -->
+    <div class="footer-actions">
+      <button id="new-game-btn" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+        </svg>
+        新しいパズルを開始
+      </button>
+    </div>
+  </div>
+
+  <!-- Clear / Victory Modal -->
+  <div id="win-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-icon">🎉</div>
+      <h2 class="modal-title">おめでとうございます！</h2>
+      <p class="modal-desc">見事にナンプレをクリアしました！素晴らしい集中力です。</p>
+      <div class="modal-stats">
+        <div class="stat-item">
+          <span class="stat-label">難易度</span>
+          <span class="stat-value" id="modal-diff">中級</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">クリアタイム</span>
+          <span class="stat-value" id="modal-time">04:32</span>
+        </div>
+      </div>
+      <button id="modal-restart-btn" class="btn-primary" style="width: 100%;">
+        次のパズルに挑戦
+      </button>
+    </div>
+  </div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <script src="sudoku.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

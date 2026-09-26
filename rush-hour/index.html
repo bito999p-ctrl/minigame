@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ラッシュアワー - Rush Hour Master</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="logo-area">
+        <a href="../index.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 6px; background: rgba(255,255,255,0.05); margin-right: 6px;">← 一覧</a>
+        <h1>ラッシュアワー</h1>
+        <span class="badge">Rush Hour</span>
+      </div>
+    </header>
+
+    <!-- Stage Bar & Score -->
+    <div class="status-bar">
+      <div class="stage-nav">
+        <button id="prev-stage-btn" class="nav-btn" title="前のステージ">◀</button>
+        <div class="stage-title-wrap">
+          <span id="stage-title" class="stage-title">ステージ 1</span>
+          <span id="stage-diff" class="stage-diff">初級</span>
+        </div>
+        <button id="next-stage-btn" class="nav-btn" title="次のステージ">▶</button>
+      </div>
+
+      <div class="metrics">
+        <div class="metric-item">
+          <span class="metric-label">手数</span>
+          <span id="moves-count" class="metric-value">0</span>
+        </div>
+        <div class="metric-item">
+          <span class="metric-label">最短目安</span>
+          <span id="min-moves" class="metric-value">0</span>
+        </div>
+        <div class="stars-display" id="stars-display">
+          <span class="star active">★</span>
+          <span class="star active">★</span>
+          <span class="star active">★</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parking Lot Board -->
+    <div class="board-container">
+      <div id="parking-lot" class="parking-lot">
+        <!-- 6x6 背景グリッド -->
+        <div class="parking-grid">
+          <div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div>
+          <div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div>
+          <div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div>
+          <div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div>
+          <div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div>
+          <div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div><div class="grid-slot"></div>
+        </div>
+
+        <!-- EXIT ゲート -->
+        <div class="exit-gate">
+          <div class="exit-sign">EXIT ➔</div>
+        </div>
+
+        <!-- 車両（動的にレンダリング） -->
+        <div id="cars-layer"></div>
+      </div>
+    </div>
+
+    <!-- Action Tools -->
+    <div class="controls-bar">
+      <button id="undo-btn" class="tool-btn" title="1手戻す" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 7v6h6"></path>
+          <path d="M21 17a9 9 0 00-9-9 9 9 0 00-6 2.3L3 13"></path>
+        </svg>
+        <span>戻す</span>
+      </button>
+
+      <button id="reset-btn" class="tool-btn" title="やり直す">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+        </svg>
+        <span>リセット</span>
+      </button>
+
+      <button id="hint-btn" class="tool-btn" title="次の一手ヒント">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18h6"></path>
+          <path d="M10 22h4"></path>
+          <path d="M15 8a5 5 0 0 0-8.9-3.2A5 5 0 0 0 8 13.9v1.1a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-1.1A5 5 0 0 0 15 8z"></path>
+        </svg>
+        <span>ヒント</span>
+      </button>
+
+      <button id="stage-select-btn" class="tool-btn" title="ステージ選択">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+        <span>選択</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Clear Modal -->
+  <div id="clear-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-icon">🚗💨</div>
+      <h2 class="modal-title">脱出成功！</h2>
+      <div class="modal-stars" id="modal-stars">★★★</div>
+      <div class="modal-stats">
+        <div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">あなたの手数</div>
+          <div style="font-size: 1.3rem; font-weight: 700; color: #ef4444;" id="modal-moves">12</div>
+        </div>
+        <div>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">最短記録</div>
+          <div style="font-size: 1.3rem; font-weight: 700; color: #38bdf8;" id="modal-min">12</div>
+        </div>
+      </div>
+      <button id="modal-next-btn" class="btn-primary">次のステージへ</button>
+    </div>
+  </div>
+
+  <!-- Stage Selection Modal -->
+  <div id="stage-modal" class="modal-overlay">
+    <div class="modal-content" style="max-width: 440px;">
+      <h2 class="modal-title">ステージ選択</h2>
+      <div id="stage-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 16px 0 20px;"></div>
+      <button id="close-stage-modal-btn" class="btn-primary" style="background: #374151;">閉じる</button>
+    </div>
+  </div>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <script src="levels.js"></script>
+  <script src="solver.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

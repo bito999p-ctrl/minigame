@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Mini Games - ミニゲームコレクション</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="logo-badge">Web Mini Games</div>
+      <h1>ブラウザで遊べる<br><span class="gradient-text">本格パズルゲーム</span></h1>
+      <p class="subtitle">インストール不要！PCでもスマホでも、ブラウザを開くだけですぐに遊べるロジックパズルコレクションです。</p>
+    </header>
+
+    <!-- Games Grid -->
+    <main class="games-grid">
+      <!-- ナンプレ (Sudoku) -->
+      <a href="sudoku/index.html" class="game-card sudoku-card">
+        <div class="card-glow"></div>
+        <div class="card-inner">
+          <div class="card-header">
+            <span class="game-icon">🔢</span>
+            <div class="card-badges">
+              <span class="badge blue">初級〜エキスパート</span>
+              <span class="badge purple">一意解保証</span>
+            </div>
+          </div>
+          <h2>ナンプレ (数独)</h2>
+          <p class="description">
+            毎回ランダムに生成される本格数独パズル。メモ（鉛筆）機能、Undo/Redo、入力ミス検知、ヒント機能、クリア時の紙吹雪演出を搭載。
+          </p>
+          <div class="features-list">
+            <span>✓ 自動問題生成</span>
+            <span>✓ メモ（鉛筆）機能</span>
+            <span>✓ 紙吹雪エフェクト</span>
+          </div>
+          <div class="play-btn">
+            今すぐ遊ぶ
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- ラッシュアワー (Rush Hour) -->
+      <a href="rush-hour/index.html" class="game-card rush-hour-card">
+        <div class="card-glow"></div>
+        <div class="card-inner">
+          <div class="card-header">
+            <span class="game-icon">🚗💨</span>
+            <div class="card-badges">
+              <span class="badge red">全10ステージ</span>
+              <span class="badge green">BFSソルバー内蔵</span>
+            </div>
+          </div>
+          <h2>ラッシュアワー</h2>
+          <p class="description">
+            混雑した駐車場から赤い車を脱出させる大人気スライディングパズル。指先・マウスでの快適スライド、三ツ星評価、最短手数ヒント機能を搭載。
+          </p>
+          <div class="features-list">
+            <span>✓ フリック＆ドラッグ操作</span>
+            <span>✓ 三ツ星評価（★★★）</span>
+            <span>✓ 次の一手ヒント</span>
+          </div>
+          <div class="play-btn">
+            今すぐ遊ぶ
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </div>
+        </div>
+      </a>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2026 Web Mini Games Collection | Powered by Vanilla JS & HTML5</p>
+    </footer>
+  </div>
+</body>
+</html>
