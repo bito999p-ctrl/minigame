@@ -113,6 +113,20 @@ h1 {
   box-shadow: 0 20px 30px -10px rgba(239, 68, 68, 0.3);
 }
 
+.game-2048-card:hover {
+  box-shadow: 0 20px 30px -10px rgba(245, 158, 11, 0.3);
+}
+
+.minesweeper-card:hover {
+  box-shadow: 0 20px 30px -10px rgba(56, 189, 248, 0.3);
+}
+
+.badge.orange {
+  background: rgba(249, 115, 22, 0.15);
+  color: #fb923c;
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
 .card-inner {
   display: flex;
   flex-direction: column;
@@ -211,6 +225,18 @@ h1 {
   background: linear-gradient(135deg, #ef4444, #dc2626);
   color: #ffffff;
   box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.game-2048-card .play-btn {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.minesweeper-card .play-btn {
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
 }
 
 .game-card:hover .play-btn {

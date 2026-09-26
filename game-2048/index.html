@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>2048 - Web Mini Games</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-left">
+        <a href="../index.html" class="back-link">← 一覧</a>
+        <h1 class="logo">2048</h1>
+      </div>
+      <div class="scores-container">
+        <div class="score-box">
+          <span class="score-label">SCORE</span>
+          <span id="score-val" class="score-value">0</span>
+        </div>
+        <div class="score-box">
+          <span class="score-label">BEST</span>
+          <span id="best-val" class="score-value">0</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Controls -->
+    <div class="controls-bar">
+      <p class="game-instruction">矢印キーまたはスワイプで同じ数字を合体！</p>
+      <div class="action-buttons">
+        <button id="undo-btn" class="action-btn" title="1手戻す" disabled>戻す</button>
+        <button id="restart-btn" class="action-btn restart" title="リスタート">再挑戦</button>
+      </div>
+    </div>
+
+    <!-- 2048 Game Board -->
+    <div class="board-container">
+      <div id="game-board" class="game-board">
+        <!-- 4x4 background cells -->
+        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+        <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+
+        <!-- Dynamic Tiles Layer -->
+        <div id="tile-container" class="tile-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Over Modal -->
+  <div id="game-over-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-icon">💀</div>
+      <h2 class="modal-title">ゲームオーバー</h2>
+      <p class="modal-desc">動かせるタイルがなくなりました。</p>
+      <div class="final-score">SCORE: <span id="final-score-val">0</span></div>
+      <button id="modal-retry-btn" class="btn-primary">もう一度プレイ</button>
+    </div>
+  </div>
+
+  <!-- Win Modal -->
+  <div id="win-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-icon">🏆</div>
+      <h2 class="modal-title">2048 達成！</h2>
+      <p class="modal-desc">見事2048タイルを作成しました！さらに上を目指しますか？</p>
+      <div class="modal-actions">
+        <button id="keep-going-btn" class="btn-primary" style="background:#4b5563;">続ける</button>
+        <button id="modal-win-restart-btn" class="btn-primary">最初からやり直す</button>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>

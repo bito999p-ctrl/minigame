@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>マインスイーパー - Web Mini Games</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-left">
+        <a href="../index.html" class="back-link">← 一覧</a>
+        <h1 class="logo">マインスイーパー</h1>
+      </div>
+      <div class="difficulty-select-wrap">
+        <select id="difficulty-select">
+          <option value="easy" selected>初級 (9x9)</option>
+          <option value="medium">中級 (16x16)</option>
+          <option value="hard">上級 (30x16)</option>
+        </select>
+      </div>
+    </header>
+
+    <!-- Retro LCD Dashboard -->
+    <div class="dashboard">
+      <div class="lcd-box" id="mine-counter">010</div>
+      <button id="face-btn" class="face-btn" title="リスタート">😊</button>
+      <div class="lcd-box" id="timer">000</div>
+    </div>
+
+    <!-- Mobile Action Toggle (Open / Flag) -->
+    <div class="mobile-toggle-bar">
+      <button id="flag-mode-btn" class="mode-btn">
+        <span class="mode-icon">🚩</span>
+        <span>旗モード: <strong id="flag-mode-text">OFF</strong></span>
+      </button>
+      <span class="mode-hint">（右クリックまたは長押しでも旗立て可）</span>
+    </div>
+
+    <!-- Minesweeper Board -->
+    <div class="board-wrapper">
+      <div id="mine-board" class="mine-board"></div>
+    </div>
+  </div>
+
+  <!-- Win / Game Over Modal -->
+  <div id="result-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-icon" id="modal-icon">🎉</div>
+      <h2 class="modal-title" id="modal-title">クリアおめでとう！</h2>
+      <p class="modal-desc" id="modal-desc">すべての安全なマスを開放しました！</p>
+      <div class="clear-stats">タイム: <strong id="modal-time-val">045秒</strong></div>
+      <button id="modal-restart-btn" class="btn-primary">もう一度遊ぶ</button>
+    </div>
+  </div>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>
