@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ブロックブラスト - Web Mini Games</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+JP:wght@500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-left">
+        <a href="../index.html" class="back-link">← 一覧</a>
+        <h1 class="logo">Block<span>Blast</span></h1>
+      </div>
+      <div class="scores-container">
+        <div class="score-box">
+          <span class="score-label">SCORE</span>
+          <span id="score-val" class="score-value">0</span>
+        </div>
+        <div class="score-box">
+          <span class="score-label">BEST</span>
+          <span id="best-val" class="score-value">0</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Controls -->
+    <div class="controls-bar">
+      <p class="game-instruction">ブロックをドラッグして盤面に配置！縦横1列そろえば消える</p>
+      <button id="restart-btn" class="action-btn restart">再挑戦</button>
+    </div>
+
+    <!-- Board -->
+    <div class="board-wrap">
+      <div id="board" class="board"></div>
+      <div id="combo-pop" class="combo-pop"></div>
+    </div>
+
+    <!-- Piece tray -->
+    <div id="tray" class="tray">
+      <div class="slot" data-slot="0"></div>
+      <div class="slot" data-slot="1"></div>
+      <div class="slot" data-slot="2"></div>
+    </div>
+
+    <!-- Game over -->
+    <div id="game-over" class="overlay hidden">
+      <div class="overlay-card">
+        <h2>ゲームオーバー</h2>
+        <p class="final-label">SCORE</p>
+        <p id="final-score" class="final-score">0</p>
+        <p id="new-best" class="new-best hidden">🎉 ベストスコア更新！</p>
+        <button id="retry-btn" class="action-btn restart big">もう一度遊ぶ</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

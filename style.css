@@ -121,6 +121,10 @@ h1 {
   box-shadow: 0 20px 30px -10px rgba(56, 189, 248, 0.3);
 }
 
+.block-blast-card:hover {
+  box-shadow: 0 20px 30px -10px rgba(168, 85, 247, 0.3);
+}
+
 .badge.orange {
   background: rgba(249, 115, 22, 0.15);
   color: #fb923c;
@@ -237,6 +241,12 @@ h1 {
   background: linear-gradient(135deg, #0284c7, #0369a1);
   color: #ffffff;
   box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+}
+
+.block-blast-card .play-btn {
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
 }
 
 .game-card:hover .play-btn {
